@@ -1,0 +1,130 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Suggestion Api Documentation",
+        "description": "Documentation",
+        "contact": {
+            "email": "hello@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://project-api.loc",
+            "description": "Documentation"
+        }
+    ],
+    "paths": {
+        "/api/suggestion": {
+            "post": {
+                "tags": [
+                    "Api"
+                ],
+                "summary": "Check on spell check",
+                "description": "Check on spell check",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "Pass a text and language.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "text",
+                                    "language"
+                                ],
+                                "properties": {
+                                    "text": {
+                                        "type": "string",
+                                        "example": "Welcome to the world"
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "example": "en"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "false"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "text": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The text is required."
+                                                    }
+                                                },
+                                                "language": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The language is required."
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successfull registration.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "text",
+                                        "language"
+                                    ],
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "original": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Welcame"
+                                                    }
+                                                },
+                                                "suggestions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "['Welcome', 'Camel']"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
